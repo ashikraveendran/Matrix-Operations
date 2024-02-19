@@ -1,0 +1,58 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    int n, i, j, k;
+    float x;
+    float determinant = 1.0; // Initialize determinant to 1.0
+
+    cout << "Size: ";
+    cin >> n;
+
+    float m[n][n];
+
+    // Input matrix
+    for (i = 0; i < n; i++) {
+        for (j = 0; j < n; j++) {
+            cout << "Enter element at position (" << i + 1 << "," << j + 1 << "): ";
+            cin >> m[i][j];
+        }
+    }
+
+    // Display input matrix
+    cout << "Input matrix:" << endl;
+    for (i = 0; i < n; i++) {
+        for (j = 0; j < n; j++) {
+            cout << m[i][j] << " ";
+        }
+        cout << endl;
+    }
+
+    // Gaussian Elimination
+    for (k = 0; k < n; k++) {
+        for (i = k + 1; i < n; i++) {
+            x = m[i][k] / m[k][k];
+            for (j = k; j < n; j++) {
+                m[i][j] -= x * m[k][j];
+            }
+        }
+    }
+
+    // Display matrix after elimination
+    cout << "Matrix after elimination:" << endl;
+    for (i = 0; i < n; i++) {
+        for (j = 0; j < n; j++) {
+            cout << m[i][j] << " ";
+        }
+        cout << endl;
+    }
+
+    // Calculate determinant as the product of diagonal elements
+    for (i = 0; i < n; i++) {
+        determinant *= m[i][i];
+    }
+
+    cout << "Determinant: " << determinant << endl;
+
+    return 0;
+}
